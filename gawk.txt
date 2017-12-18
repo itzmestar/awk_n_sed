@@ -1,0 +1,39 @@
+For help using gawk, you may find the tutorial http://www.grymoire.com/Unix/Awk.html useful.
+
+a) Consider the following file called coords.txt:
+x1	y1	x2	y2
+0.0	0.0	0.4	1.0
+0.5	0.1	-0.25	0.9
+0.75	0.4	-2.5	2.2
+1.0	1.3	-1.0	4.2
+
+Each field in this file is separated by a tab and each record is separated by a newline character. 
+gawk is a very powerful utility; it can make calculations as well as support branching statements and 
+function calls. Now write a one-line gawk script that computes the distance between each pair of points 
+using the given tutorial above as a guide. 
+Hint: gawk supports the sqrt function! Obviously, you need to skip the first line (i.e., the header) 
+and only print out four values, the first of which is 1.07703. 
+
+Answer: 
+cat coords.txt | gawk 'BEGIN { lines=0; } { lines++; if ( lines != 1 ) { x = ($3 - $1)*($3-$1); y = ($4-$2)*($4-$2); z= sqrt(x+y); print z;} } END {}'
+
+b) Consider the following file called elems.txt:
+1,H,Hydrogen
+2,He,Helium
+3,Li,Lithium
+4,Be,Beryllium
+115,Mc,Moscovium
+116,Lv,Livermorium
+117,Ts,Tennessine
+118,Og,Oganesson
+
+This file contains a list of the elements in the periodic table. Each field in this file is separated by 
+a comma and each record is separated by a newline character. First, write a one-line gawk script that 
+prints out just the record number and the element symbol (e.g., He) of all the elements in the list 
+that contain the pattern "ium", without the quotes. Then, write another one-line gawk script that prints 
+just the total number of lines that contain the pattern "ium”, without the quotes.
+
+Solution:
+cat elems.txt | gawk 'BEGIN { FS=","; regex="ium"; } { if (match($3,regex)) { print $1 ""  $2;} } END {}'
+
+cat elems.txt | gawk 'BEGIN { FS=","; regex="ium"; lines=0} { if (match($3,regex)) { lines++;} } END {print lines}'
