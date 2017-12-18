@@ -1,0 +1,54 @@
+For help using sed, you may find the tutorial http://www.grymoire.com/Unix/Sed.html useful.
+
+a)	Write a one-line sed command that will replace all multiple spaces in a file called names.txt 
+(this is an arbitrary file that you may create yourself) by only one space.
+
+Solution:  sed 's/[[:space:]]\+/ /g'names.txt                
+
+b)	Consider the following file called system.txt:
+1  2  3  4
+5  6  7  8
+9  He 11 Hg
+Ts H  15 Be
+17 Mc Li 20
+
+Write a one-line sed command that replaces the second number in every line with the string “system”, 
+without the quotes. For example, after running the appropriate sed command, the following would be output to the terminal:
+
+1 system  3  4
+5  system  7  8
+9  He system Hg
+Ts H  15 Be
+17 Mc Li system
+
+Solution:
+ sed 's/[0-9][0-9]*/system/2' system.txt        
+
+c)	Consider the following file called swap.txt:
+349 230 481
+800 456 129
+043 942 584 
+901 627 874
+
+Each three-digit number is separated by a space. Write a one-line sed command that performs 
+in-place substitution to swap the first digit with the third digit of the first number in every line. 
+For example, after running the appropriate sed command, the swap.txt file would not contain:
+
+943 230 481
+008 456 129
+340 942 584 
+109 627 874
+
+Solution:
+sed 's/^\([0-9]\)\([0-9]\)\([0-9]\)/\3\2\1/' swap.txt
+
+For bonus, can you swap the first digit with the third digit of the second number in every line? 
+Do not worry about performing in-place substitution for this part. For example, after running the appropriate sed command, 
+the following would be output to the terminal:
+
+349 032 481
+800 654 129
+043 249 584 
+901 726 874
+
+Solution: sed 's/\([0-9]\)\([0-9]\)\([0-9]\)/\3\2\1/2' swap.txt
