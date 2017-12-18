@@ -1,0 +1,14 @@
+Write a regular expression that matches:
+a)	all strings that end with a dot character ".", without the quotes.
+Answer: .*\.
+
+b)	all strings that begin with a "#" character, without the quotes.
+Answer: #.*
+
+c)	all floating-point numbers using standard notation (e.g., 12.345 or –12.345). 
+Note that matching numbers may contain any number of digits before or after the decimal point.
+Answer: [-0-9]+\.[0-9]+
+
+d)	all floating-point numbers using scientific notation (e.g., 1.234e+5 or –1.234E–5). Again, 
+matching numbers may contain any number of digits before or after the decimal point.
+Answer: [-0-9]+[eE][+-][0-9]+
